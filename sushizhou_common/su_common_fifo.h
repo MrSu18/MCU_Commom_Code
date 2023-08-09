@@ -1,12 +1,15 @@
 #ifndef _SU_COMMON_FIFO_H
 #define	_SU_COMMON_FIFO_H
 
+/*FIFO的缓存形式为:循环队列-*/
+
 #include "su_common_typedef.h"
 
 typedef enum SuFIFOState
 {
     kFIFOSuccess=0,
     kFIFOBufferNull,//内存不存在
+    kFIFOBufferNoFull,//队列满(未空)
     kFIFOBufferFull,//队满
     kFIFOBufferEmpty,//队空
 }SuFIFOState;
@@ -27,6 +30,7 @@ typedef struct SuFIFO
     uint32_t        size;         // 缓存剩余大小
     uint32_t        length;       // 缓存长度
     uint32_t        max;          // 缓存总大小
+    SuFIFOState     state;        //队列状态
 }SuFIFO;
 
 SuFIFOState FIFO_Init (SuFIFO *fifo, SuFIFODataType type, void *buffer_addr, uint32_t size);

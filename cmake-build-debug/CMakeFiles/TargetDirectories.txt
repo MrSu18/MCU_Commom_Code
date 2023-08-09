@@ -1,0 +1,3 @@
+E:/nodeanddata/MCU_project/MCU_Common_Code/cmake-build-debug/CMakeFiles/MCU_Common_Code.dir
+E:/nodeanddata/MCU_project/MCU_Common_Code/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/nodeanddata/MCU_project/MCU_Common_Code/cmake-build-debug/CMakeFiles/rebuild_cache.dir

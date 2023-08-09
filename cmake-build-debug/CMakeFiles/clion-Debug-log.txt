@@ -1,0 +1,4 @@
+"E:\IDE\CLion 2022.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=E:/IDE/CLion 2022.3/bin/ninja/win/x64/ninja.exe" -G Ninja -S E:\nodeanddata\MCU_project\MCU_Common_Code -B E:\nodeanddata\MCU_project\MCU_Common_Code\cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: E:/nodeanddata/MCU_project/MCU_Common_Code/cmake-build-debug

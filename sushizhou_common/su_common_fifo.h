@@ -1,21 +1,23 @@
 #ifndef _SU_COMMON_FIFO_H
 #define	_SU_COMMON_FIFO_H
 
+/*FIFO的缓存形式为:循环队列-*/
+
 #include "su_common_typedef.h"
 
 typedef enum SuFIFOState
 {
-    kFIFOSuccess=0,
-    kFIFOBufferNull,//内存不存在
+    kFIFOBufferNull=0,//内存不存在
+    kFIFOBufferNoFull,//队列满(未空)
     kFIFOBufferFull,//队满
     kFIFOBufferEmpty,//队空
 }SuFIFOState;
 
 typedef enum SuFIFODataType
 {
-    kFIFOData8bit=0,
-    kFIFOData16bit,
-    kFIFOData32bit,
+    kFIFOData8bit=1,
+    kFIFOData16bit=2,
+    kFIFOData32bit=3,
 }SuFIFODataType;
 
 typedef struct SuFIFO
@@ -27,10 +29,13 @@ typedef struct SuFIFO
     uint32_t        size;         // 缓存剩余大小
     uint32_t        length;       // 缓存长度
     uint32_t        max;          // 缓存总大小
+    SuFIFOState     state;        //队列状态
 }SuFIFO;
 
-SuFIFOState FIFO_Init (SuFIFO *fifo, SuFIFODataType type, void *buffer_addr, uint32_t size);
-SuFIFOState FIFO_Write_Element (SuFIFO *fifo, uint32_t dat);
-SuFIFOState FIFO_Read_Element(SuFIFO *fifo, void *dat);
+FunctionStatus FIFO_Init (SuFIFO *fifo, SuFIFODataType type, void *buffer_addr, uint32_t size);//队列初始化
+FunctionStatus FIFO_Write_Element (SuFIFO *fifo, uint32_t dat);//入队
+FunctionStatus FIFO_Out_Element(SuFIFO *fifo, void *dat);//出队
+FunctionStatus FIFO_Search_Element(SuFIFO *fifo, void *dat, uint32_t num);//查询队列里面第几个元素
+FunctionStatus FIFO_Clear(SuFIFO *fifo);//队列清空
 
 #endif

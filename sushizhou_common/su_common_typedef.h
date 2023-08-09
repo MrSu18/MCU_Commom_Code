@@ -10,4 +10,10 @@ typedef unsigned char           uint8_t;    //ÎÞ·ûºÅ8bits
 typedef unsigned short int      uint16_t;   //ÎÞ·ûºÅ16bits                                           
 typedef unsigned int            uint32_t;   //ÎÞ·ûºÅ32bits  
 
+typedef enum
+{
+    kSuccess=0,
+    kERROR=1
+}FunctionStatus;
+
 #endif

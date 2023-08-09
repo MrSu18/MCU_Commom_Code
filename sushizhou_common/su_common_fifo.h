@@ -15,9 +15,9 @@ typedef enum SuFIFOState
 
 typedef enum SuFIFODataType
 {
-    kFIFOData8bit=0,
-    kFIFOData16bit,
-    kFIFOData32bit,
+    kFIFOData8bit=1,
+    kFIFOData16bit=2,
+    kFIFOData32bit=3,
 }SuFIFODataType;
 
 typedef struct SuFIFO
@@ -32,9 +32,10 @@ typedef struct SuFIFO
     SuFIFOState     state;        //队列状态
 }SuFIFO;
 
-FunctionStatus FIFO_Init (SuFIFO *fifo, SuFIFODataType type, void *buffer_addr, uint32_t size);
+FunctionStatus FIFO_Init (SuFIFO *fifo, SuFIFODataType type, void *buffer_addr, uint32_t size);//队列初始化
 FunctionStatus FIFO_Write_Element (SuFIFO *fifo, uint32_t dat);//入队
 FunctionStatus FIFO_Out_Element(SuFIFO *fifo, void *dat);//出队
 FunctionStatus FIFO_Search_Element(SuFIFO *fifo, void *dat, uint32_t num);//查询队列里面第几个元素
+FunctionStatus FIFO_Clear(SuFIFO *fifo);//队列清空
 
 #endif

@@ -14,6 +14,6 @@ int main()
     }
     uint8_t data=0;
     FIFO_Search_Element(&fifo,&data,5);
-
+    FIFO_Clear(&fifo);
     return 0;
 }

@@ -175,3 +175,22 @@ FunctionStatus FIFO_Search_Element(SuFIFO *fifo, void *dat, uint32_t num)
     }
     return return_value;
 }
+
+/***********************************************
+* @brief : 队列清空
+* @param : SuFIFO *fifo: 队列变量
+* @return: 函数执行是否成功
+* @date  : 2023.8.10
+* @author: sushizhou
+************************************************/
+FunctionStatus FIFO_Clear(SuFIFO *fifo)
+{
+    SuFIFOState return_value = kSuccess;
+    memset(fifo->buffer,0,fifo->max*fifo->type);
+    fifo->front             = 0;
+    fifo->rear              = 0;
+    fifo->size              = fifo->max;
+    fifo->length            = 0;
+    fifo->state             = kFIFOBufferEmpty;
+    return return_value;
+}

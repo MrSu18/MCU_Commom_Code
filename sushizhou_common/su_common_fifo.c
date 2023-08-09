@@ -111,20 +111,27 @@ SuFIFOState FIFO_Write_Element (SuFIFO *fifo, uint32_t dat)
 SuFIFOState FIFO_Read_Element(SuFIFO *fifo, void *dat)
 {
     SuFIFOState return_value = kFIFOSuccess;
-
-    switch(fifo->type)
+    //出队要跟入队相反，根据状态出队，因为是循环队列所以入队是一直入的，但是出队，你出完了就不能出了
+    if (fifo->length>0)
     {
-        case kFIFOData8bit:
-            *((uint8_t *)dat) = ((uint8_t *)fifo->buffer)[fifo->front];
-            break;
-        case kFIFOData16bit:
-            *((uint16_t *)dat) = ((uint16_t *)fifo->buffer)[fifo->front];
-            break;
-        case kFIFOData32bit:
-            *((uint32_t *)dat) = ((uint32_t *)fifo->buffer)[fifo->front];
-            break;
+        switch(fifo->type)
+        {
+            case kFIFOData8bit:
+                *((uint8_t *)dat) = ((uint8_t *)fifo->buffer)[fifo->front];
+                break;
+            case kFIFOData16bit:
+                *((uint16_t *)dat) = ((uint16_t *)fifo->buffer)[fifo->front];
+                break;
+            case kFIFOData32bit:
+                *((uint32_t *)dat) = ((uint32_t *)fifo->buffer)[fifo->front];
+                break;
+        }
+        FIFO_Front_Offset(fifo, 1);
+        fifo->size+=1;//可用缓存增加
+        fifo->length-=1;//队列长度减小
+        return_value=kFIFOBufferNoFull;
     }
-    FIFO_Front_Offset(fifo, 1);
+    else return_value=kFIFOBufferEmpty;
 
     return return_value;
 }

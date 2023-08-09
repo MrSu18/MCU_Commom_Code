@@ -13,7 +13,10 @@ int main()
         fifo.state=FIFO_Write_Element(&fifo,i);
     }
     uint8_t data=0;
-    FIFO_Read_Element(&fifo,&data);
+    for (int i = 0; i < 10; ++i)
+    {
+        fifo.state=FIFO_Read_Element(&fifo, &data);
+    }
 
     return 0;
 }
